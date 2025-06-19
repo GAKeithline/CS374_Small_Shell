@@ -1,0 +1,5 @@
+Program implements a limited shell that emulates standardized shells, such as bash. Smallsh features 3 built-in commands, 'exit', 'cd', and 'status', that are all handled locally within the program. All other commands of the
+format "command [arg1 arg2 ...] [< input_file] [> output_file] [&]" are sent to a parser function (the brackets are ommitted). The input "command [arg1 arg2 ...]" are sent to an execvp() function inside of a child process.
+The input "[< input_file] [> output_file]" is used to redirect the input and output respecively. The input "[&]" indicates the command is to be run as a background process. Smallsh includes custom handlers for SIGINT and SIGTSTP.
+Background processes, as well as the shell itself, ignore SIGINT (ctrl-c) while foreground processes default to SIGINT. Foreground and background processes both ignore SIGTSTP (ctrl-z), while the shell interprets SIGTSTP as a call
+to toggle in and out of "foreground-only mode" wherein background-processes are run in the foreground until the mode is toggled off again.
